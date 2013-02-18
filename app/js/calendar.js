@@ -59,9 +59,9 @@
        * Adds Calendar Events to the existing Event Collection.
        *
        * @param {Array} events An array of event objects. Each event object consists
-       *                      of a start and end time (measured in minutes) from 9am,
-       *                      as well as a unique id. The start time will be less than
-       *                      the end time.
+       *                       of a start and end time (measured in minutes) from 9am,
+       *                       as well as a unique id. The start time will be less than
+       *                       the end time.
        */
       addEvents: function(events) {
         this.eventCollection.add(events);
@@ -183,8 +183,8 @@
       /**
        * Finds an event in the collection by id. Returns false if not found.
        *
-       * @param {Number} event The id of the event object for which to search.
-       * @returns {Object | Boolean} The event object. Returns false if not found.
+       * @param {Number} event The id of the Event object for which to search.
+       * @returns {Object | Boolean} The Event object. Returns false if not found.
        */
       findById: function(id) {
         var i = this.events.length;
@@ -197,9 +197,9 @@
       },
 
       /**
-       * Calculates and sets the a collision groups matrix. The matrix has
-       * a reference to all the ids of all events in this eventsCollection. The
-       * collections are grouped together in a net of all events which overlap,
+       * Calculates and sets a collision groups structure. The group has
+       * a reference to all the ids of all Events in this EventCollection. The
+       * collections are grouped together by all events which overlap,
        * directly. For example, if A overlaps with B and B overlaps with C but
        * A and C do not overlap, each A, B, and C will all be in the same
        * collision group at index 0. If D then does not overlap with any other
@@ -212,7 +212,7 @@
 
         collisionGroups[0].push(events[0].id);
 
-        // Each event starting from second event
+        // Each Event starting from second event
         for (var i = 1, l = events.length; i < l; ++i) {
           var event = events[i];
 
@@ -226,9 +226,9 @@
 
             if (event.collidesWith(previousEvent)) {
               // Find the collision group that previous event belongs to
-              // and add current event's id to that collision group
+              // and add current Event's id to that collision group
 
-              // Whether the previous event id has been found in a collision group
+              // Whether the previous Event id has been found in a collision group
               var found2 = false;
 
               // Count backwards since it is probably more likely that
@@ -237,7 +237,7 @@
               var k = collisionGroups.length;
               while (!found2 && k--) {
                 if (_.indexOf(collisionGroups[k], previousEvent.id) !== -1) {
-                  // Add current event's id to this collision group
+                  // Add current Event's id to this collision group
                   collisionGroups[k].push(event.id);
                   found2 = true;
                 }
@@ -247,7 +247,7 @@
             }
           } while (!found && j--);
 
-          // Did not collide with any other events so give it its own
+          // Did not collide with any other Events so give it its own
           // collision group
           if (!found) {
             collisionGroups.push([event.id]);
@@ -258,7 +258,7 @@
       },
 
       /**
-       * Calculates and sets the positions of all the events in the collision
+       * Calculates and sets the positions of all the Events in the collision
        * group. Assumes the EventCollection is sorted by start time.
        */
       calculatePositions: function() {
@@ -279,7 +279,7 @@
           // Initialize first row
           matrix[0] = [];
 
-          // Each event in the collision group
+          // Each Event in the collision group
           for (var j = 0, l2 = group.length; j < l2; ++j) {
             // While incrementing columns, if there is no existing last event in
             // the current column, then place the current event. If there is an
@@ -409,7 +409,6 @@
       this.left = null;
       this.width = null;
       this.height = null;
-      this.widthDivisor = null;
     }
 
     Event.prototype = {
