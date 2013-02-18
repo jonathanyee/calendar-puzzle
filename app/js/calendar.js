@@ -42,18 +42,11 @@
 
       if (events) {
         this.eventCollection.add(events);
-        this.init();
+        this.layOutDay();
       }
     }
 
     Calendar.prototype = {
-
-      /**
-       * Initializes Calendar and calls methods to calculate positions.
-       */
-      init: function() {
-        this.layOutDay();
-      },
 
       /**
        * Adds Calendar Events to the existing Event Collection.
